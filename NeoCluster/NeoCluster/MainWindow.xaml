@@ -5,14 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NeoCluster"
         mc:Ignorable="d"
-        Title="NeoCluster" Height="183" Width="417">
+        Title="NeoCluster" Height="720" Width="1280"
+        Background="#FF091F2D"
+        FontFamily="Bahnschrift">
     <Grid>
-        <TextBlock x:Name="lblGear" Text="N" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"></TextBlock>
-        <Button x:Name="btnDebug" Content="Start" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Height="24" Width="52" Click="btnDebug_Click"/>
-        <ProgressBar x:Name="prgRpm" Margin="0,136,0,0"></ProgressBar>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <TextBlock x:Name="lblSpeed" Text="000" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Height="105" FontSize="72"/>
-            <TextBlock x:Name="lblKm" Text="km/h" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" FontSize="36"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- toolbar background -->
+        <Rectangle Grid.Row="0">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <!-- toolbar -->
+        <Grid Grid.Row="0" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" x:Name="btnStart" Content="Start/Stop" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="24" Click="btnStart_Click"/>
+            <Button Grid.Column="2" x:Name="btnDrive" Content="Drive" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="24"/>
+            <Button Grid.Column="3" x:Name="btnSettings" Content="Settings" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="24"/>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Bottom">
+                <Rectangle Height="5" >
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#0000FFF7"/>
+                            <GradientStop Color="#0000FFF7" Offset="1"/>
+                            <GradientStop Color="#FF00FFF7" Offset="0.5"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </StackPanel>
+        </Grid>
+
+        <!-- main cluster -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
+            <TextBlock x:Name="lblDebug" Text="" FontSize="48" Foreground="White"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <!-- rpm bar -->
+                <Grid>
+                    <ProgressBar Value="100" x:Name="prgRpm" Orientation="Vertical" BorderBrush="{x:Null}" Width="80" Background="{x:Null}" Foreground="#FFFF4801" Height="290"/>
+                    <Image Width="100" Source="/Assets/gaugeng.png" VerticalAlignment="Center" Height="320">
+                    </Image>
+                </Grid>
+
+                <!-- speedometer/gear -->
+                <StackPanel Orientation="Vertical" Margin="0,15,0,15">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="lblGear" Text="N" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="White" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="1" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="2" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="3" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="4" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="5" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="6" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock TextAlignment="Center" Text="7" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                    </StackPanel>
+                    <TextBlock x:Name="lblSpeed" Text="0" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontSize="160" FontFamily="Bahnschrift Light" Foreground="White" Width="340" TextAlignment="Center"/>
+                    <TextBlock x:Name="lblKm" Text="km/h" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" FontSize="48" FontFamily="Bahnschrift Light" Foreground="White"/>
+                </StackPanel>
+
+                <!-- speed progress bar -->
+                <Grid>
+                    <ProgressBar Value="100" x:Name="prgSpeed" Orientation="Vertical" BorderBrush="{x:Null}" Width="80" Background="{x:Null}" Foreground="#FF01E7FF" Height="290"/>
+                    <Image Width="100" Source="/Assets/gaugeng.png" VerticalAlignment="Center" Height="320" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+
+            </StackPanel>
         </StackPanel>
+
+        <!-- bottom bar background -->
+        <Rectangle Grid.Row="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#00000000"/>
+                    <GradientStop Color="Black" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+
     </Grid>
 </Window>

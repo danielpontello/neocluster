@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Windows.Devices.Sensors;
 
 namespace NeoCluster
 {
@@ -26,7 +27,7 @@ namespace NeoCluster
             InitializeComponent();
         }
 
-        private void btnDebug_Click(object sender, RoutedEventArgs e)
+        private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             Task.Run(async () => {
                 using (var Client = new UdpClient(5678))
@@ -41,7 +42,12 @@ namespace NeoCluster
                         float idleRpm = BitConverter.ToSingle(data, 12);
                         float currentRpm = BitConverter.ToSingle(data, 16);
 
+                        float x = BitConverter.ToSingle(data, 244);
+                        float y = BitConverter.ToSingle(data, 248);
+                        float z = BitConverter.ToSingle(data, 252);
+
                         float speed = BitConverter.ToSingle(data, 256) * 3.6f;
+                        float barSpeed = (speed / 400.0f) * 100.0f;
                         int gear = data[319];
 
                         float barRpm = 0;
@@ -54,7 +60,9 @@ namespace NeoCluster
                         Dispatcher.Invoke(() => {
                             lblGear.Text = "" + gear;
                             lblSpeed.Text = "" + rSpeed;
+                            // lblDebug.Text = "x: " + x + " y: " + y + " z: " + z;
                             prgRpm.Value = barRpm;
+                            prgSpeed.Value = barSpeed;
                         });
                     }
                 }
