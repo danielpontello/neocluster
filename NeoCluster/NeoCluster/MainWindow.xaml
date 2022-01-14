@@ -26,63 +26,87 @@
         </Rectangle>
 
         <!-- toolbar -->
-        <Grid Grid.Row="0" HorizontalAlignment="Center">
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" x:Name="btnStart" Content="Start/Stop" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="24" Click="btnStart_Click"/>
-            <Button Grid.Column="2" x:Name="btnDrive" Content="Drive" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="24"/>
-            <Button Grid.Column="3" x:Name="btnSettings" Content="Settings" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="24"/>
+            <Button Grid.Column="1" x:Name="btnStart" Content="Start/Stop" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="30" Click="btnStart_Click" FontFamily="Bahnschrift Condensed"/>
+            <Button Grid.Column="2" x:Name="btnDrive" Content="Drive" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="30" FontFamily="Bahnschrift Condensed"/>
+            <Button Grid.Column="3" x:Name="btnSettings" Content="Settings" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="30" FontFamily="Bahnschrift Condensed"/>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="5" VerticalAlignment="Bottom">
-                <Rectangle Height="5" >
-                    <Rectangle.Fill>
-                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                            <GradientStop Color="#0000FFF7"/>
-                            <GradientStop Color="#0000FFF7" Offset="1"/>
-                            <GradientStop Color="#FF00FFF7" Offset="0.5"/>
-                        </LinearGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
-            </StackPanel>
+            <!-- line effect -->
+            <Rectangle Grid.Row="0" Grid.ColumnSpan="5" Height="5" VerticalAlignment="Bottom" >
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                        <GradientStop Color="#0000FFF7"/>
+                        <GradientStop Color="#0000FFF7" Offset="1"/>
+                        <GradientStop Color="#FF00FFF7" Offset="0.5"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
         </Grid>
+
+        <!-- Lap Info -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <TextBlock Text="Laps" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Center" FontSize="40" Foreground="#FFA4A4A4" TextAlignment="Center" FontFamily="Bahnschrift Light Condensed"/>
+            <TextBlock x:Name="lblLaps" Text="1/1" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Center" FontSize="120" FontFamily="Bahnschrift Light" Foreground="White" Width="340" TextAlignment="Center"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0">
+                    <TextBlock Text="Current Lap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontFamily="Bahnschrift Light Condensed" Foreground="White"/>
+                    <TextBlock x:Name="lblCurrentLap" Text="00:00:000" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontFamily="Bahnschrift Light Condensed" Foreground="#FF00FFEF" Margin="0,0,0,0" Width="125"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0">
+                    <TextBlock Text="Best Lap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontFamily="Bahnschrift Light Condensed" Foreground="White"/>
+                    <TextBlock x:Name="lblBestLap" Text="00:00:000" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontFamily="Bahnschrift Light Condensed" Foreground="#FF00FFEF" Margin="0,0,0,0" Width="125"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
 
         <!-- main cluster -->
         <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
-            <TextBlock x:Name="lblDebug" Text="" FontSize="48" Foreground="White"></TextBlock>
             <StackPanel Orientation="Horizontal">
                 <!-- rpm bar -->
                 <Grid>
-                    <ProgressBar Value="100" x:Name="prgRpm" Orientation="Vertical" BorderBrush="{x:Null}" Width="80" Background="{x:Null}" Foreground="#FFFF4801" Height="290"/>
+                    <ProgressBar Value="50" x:Name="prgRpm" Orientation="Vertical" BorderBrush="{x:Null}" Width="80" Background="#FF551B05" Foreground="#FFFF4801" Height="290"/>
                     <Image Width="100" Source="/Assets/gaugeng.png" VerticalAlignment="Center" Height="320">
                     </Image>
                 </Grid>
 
                 <!-- speedometer/gear -->
                 <StackPanel Orientation="Vertical" Margin="0,15,0,15">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock x:Name="lblGear" Text="N" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="White" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
-                        <TextBlock TextAlignment="Center" Text="1" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
-                        <TextBlock TextAlignment="Center" Text="2" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
-                        <TextBlock TextAlignment="Center" Text="3" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
-                        <TextBlock TextAlignment="Center" Text="4" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
-                        <TextBlock TextAlignment="Center" Text="5" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
-                        <TextBlock TextAlignment="Center" Text="6" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
-                        <TextBlock TextAlignment="Center" Text="7" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
-                    </StackPanel>
+                    <Grid HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblGR" TextAlignment="Center" Grid.Column="0" Text="R" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="White" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock x:Name="lblG1" TextAlignment="Center" Grid.Column="1" Text="1" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock x:Name="lblG2" TextAlignment="Center" Grid.Column="2" Text="2" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock x:Name="lblG3" TextAlignment="Center" Grid.Column="3" Text="3" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock x:Name="lblG4" TextAlignment="Center" Grid.Column="4" Text="4" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock x:Name="lblG5" TextAlignment="Center" Grid.Column="5" Text="5" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock x:Name="lblG6" TextAlignment="Center" Grid.Column="6" Text="6" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                        <TextBlock x:Name="lblG7" TextAlignment="Center" Grid.Column="7" Text="7" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF828282" Margin="0,0,10,0" Width="23" Height="40"></TextBlock>
+                    </Grid>
                     <TextBlock x:Name="lblSpeed" Text="0" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontSize="160" FontFamily="Bahnschrift Light" Foreground="White" Width="340" TextAlignment="Center"/>
-                    <TextBlock x:Name="lblKm" Text="km/h" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" FontSize="48" FontFamily="Bahnschrift Light" Foreground="White"/>
+                    <TextBlock x:Name="lblKm" Text="km/h" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Bottom" FontSize="48" FontFamily="Bahnschrift Light Condensed" Foreground="#FF8E8E8E"/>
                 </StackPanel>
 
                 <!-- speed progress bar -->
                 <Grid>
-                    <ProgressBar Value="100" x:Name="prgSpeed" Orientation="Vertical" BorderBrush="{x:Null}" Width="80" Background="{x:Null}" Foreground="#FF01E7FF" Height="290"/>
+                    <ProgressBar Value="50" x:Name="prgSpeed" Orientation="Vertical" BorderBrush="{x:Null}" Width="80" Background="#FF53052E" Foreground="#FFFF0187" Height="290"/>
                     <Image Width="100" Source="/Assets/gaugeng.png" VerticalAlignment="Center" Height="320" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
@@ -98,7 +122,27 @@
             </StackPanel>
         </StackPanel>
 
-        <!-- bottom bar background -->
+        <!-- Position Info -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <TextBlock Text="Position" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Center" FontSize="40" Foreground="#FFA4A4A4" TextAlignment="Center" FontFamily="Bahnschrift Light Condensed"/>
+            <TextBlock x:Name="lblPosition" Text="1/12" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Center" FontSize="120" FontFamily="Bahnschrift Light" Foreground="White" Width="340" TextAlignment="Center"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Race Time" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontFamily="Bahnschrift Light Condensed" Foreground="White"/>
+                <TextBlock x:Name="lblRaceTime" Text="00:00:000" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontFamily="Bahnschrift Light Condensed" Foreground="#FF00FFEF" Margin="0,0,0,0" Width="125"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- line effect -->
+        <Rectangle Grid.Row="2" Grid.ColumnSpan="5" Height="5" VerticalAlignment="Top" >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="#0000FFF7"/>
+                    <GradientStop Color="#0000FFF7" Offset="1"/>
+                    <GradientStop Color="#FF00FFEF" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
         <Rectangle Grid.Row="2">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -107,6 +151,22 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="lblConnected" Grid.Column="1" Text="Offline" Foreground="#FF989898" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="Bahnschrift Light Condensed"/>
+            <TextBlock Grid.Column="2" x:Name="lblClock"  Text="00:05" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="Bahnschrift Light Condensed"/>
+            <TextBlock x:Name="lblPaused" Grid.Column="3" Text="Running" Foreground="#FF989898" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="Bahnschrift Light Condensed"/>
+        </Grid>
+        
+
+        <TextBlock Grid.Row="2" x:Name="lblDebug" Text="" FontSize="48" Foreground="{x:Null}" HorizontalAlignment="Left"></TextBlock>
 
 
     </Grid>
