@@ -94,8 +94,8 @@ namespace NeoCluster
                             lblRaceTime.Text = currentRaceTimespan.ToString(@"mm\:ss\:fff");
 
                             lblPosition.Text = position + "/12";
-                            lblLaps.Text = lap + "/3";
-                            lblClock.Text = DateTime.Now.ToString("g");
+                            lblLaps.Text = (int)lap + 1 + "/3";
+                            lblClock.Text = DateTime.Now.ToString("t");
 
                             lblConnected.Text = "Online";
                             lblConnected.Foreground = enabledBrush;
@@ -103,6 +103,24 @@ namespace NeoCluster
                     }
                 }
             });
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowStyle != WindowStyle.SingleBorderWindow)
+            {
+                this.ResizeMode = ResizeMode.CanResize;
+                this.WindowStyle = WindowStyle.SingleBorderWindow;
+                this.WindowState = WindowState.Normal;
+                this.Topmost = false;
+            }
+            else
+            {
+                this.ResizeMode = ResizeMode.NoResize;
+                this.WindowStyle = WindowStyle.None;
+                this.WindowState = WindowState.Maximized;
+                this.Topmost = true;
+            }
         }
     }
 }

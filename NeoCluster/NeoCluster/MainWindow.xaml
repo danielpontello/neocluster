@@ -37,7 +37,7 @@
 
             <Button Grid.Column="1" x:Name="btnStart" Content="Start/Stop" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="30" Click="btnStart_Click" FontFamily="Bahnschrift Condensed"/>
             <Button Grid.Column="2" x:Name="btnDrive" Content="Drive" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="30" FontFamily="Bahnschrift Condensed"/>
-            <Button Grid.Column="3" x:Name="btnSettings" Content="Settings" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="30" FontFamily="Bahnschrift Condensed"/>
+            <Button Grid.Column="3" x:Name="btnSettings" Content="Settings" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Width="200" FontSize="30" FontFamily="Bahnschrift Condensed" Click="btnSettings_Click"/>
 
             <!-- line effect -->
             <Rectangle Grid.Row="0" Grid.ColumnSpan="5" Height="5" VerticalAlignment="Bottom" >
@@ -164,7 +164,6 @@
             <TextBlock Grid.Column="2" x:Name="lblClock"  Text="00:05" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="Bahnschrift Light Condensed"/>
             <TextBlock x:Name="lblPaused" Grid.Column="3" Text="Running" Foreground="#FF989898" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontFamily="Bahnschrift Light Condensed"/>
         </Grid>
-        
 
         <TextBlock Grid.Row="2" x:Name="lblDebug" Text="" FontSize="48" Foreground="{x:Null}" HorizontalAlignment="Left"></TextBlock>
 
