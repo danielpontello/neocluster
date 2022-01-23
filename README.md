@@ -1,5 +1,5 @@
 # neocluster
-Application to get telemetry data from Forza Horizon 5. For now, it only grabs speed, RPM and gear data.
+Application to get telemetry data from Forza Horizon 5.
 
 ![Screenshot](Docs/screenshot.png)
 
